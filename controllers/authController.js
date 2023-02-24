@@ -33,7 +33,6 @@ export const registerController = async (req, res) => {
     }
 
     //register user and need to hash the password
-
     const hashedPassword = await hashPassword(password);
     //save
     const user = await new userModel({
@@ -59,8 +58,8 @@ export const registerController = async (req, res) => {
   }
 };
 
-// method=> post login
 
+// method=> post login
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -79,7 +78,7 @@ export const loginController = async (req, res) => {
         message: "Email is not registered",
       });
     }
-    const match = await comparePassword(password,user.password);
+    const match = await comparePassword(password, user.password);
     if (!match) {
       return res.status(200).send({
         success: false,
@@ -100,7 +99,7 @@ export const loginController = async (req, res) => {
         phone: user.phone,
         address: user.address,
       },
-      token
+      token,
     });
   } catch (error) {
     console.log(error);
@@ -111,3 +110,12 @@ export const loginController = async (req, res) => {
     });
   }
 };
+
+
+
+// for the testing purpose  testController
+
+export const testController = (req,res) =>{
+  res.send("protected routes")
+
+}
