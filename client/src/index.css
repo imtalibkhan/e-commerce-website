@@ -19,3 +19,24 @@ font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif;
 font-family: 'Ubuntu', sans-serif;
 font-family: 'Work Sans', sans-serif; */
+
+
+.navbar{
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 6px -6px rgb(58, 55, 55);
+  --webkit-box-shadow: 0 8px 6px -6px rgb;
+  border-bottom: 0.5px;
+  gap: 5%
+}
+
+.nav-link {
+  font-weight: 300px;
+}
+
+.active{
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+}
