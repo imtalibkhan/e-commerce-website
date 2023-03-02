@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan"
 import connedDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js"
+import cors from "cors"
 
 
 
@@ -15,6 +16,8 @@ connedDB();
 
 //need to create rest object for create rest api
 const app = express();
+
+// app.use(cors)
 
 //middleware
 app.use(express.json())
