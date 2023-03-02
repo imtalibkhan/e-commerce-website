@@ -3,6 +3,8 @@ import Layout from "./../../components/layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import "../../style/AuthStyles.css"
+
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -25,8 +27,9 @@ const Register = () => {
         phone,
         address,
       });
-      if (res&& res.data.success) {
-        toast.success(res.data.message);
+      if (res && res.data.success) {
+        alert("login succesfully")
+        // toast.success(res.data && res.data.message);
         navigate("/login");
       } else {
         toast.error(res.data.message);
@@ -41,7 +44,7 @@ const Register = () => {
 
   return (
     <Layout title="Register E-commerce-App">
-      <div className="register">
+      <div className="form-container">
         <h1>Register Page</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
