@@ -4,7 +4,7 @@ import JWT from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
   try {
-    const { name, email, password, phone, address } = req.body;
+    const { name, email, password, phone, address ,answer} = req.body;
     //validation
     if (!name) {
       return res.send({ message: "Name is require" });
@@ -20,6 +20,9 @@ export const registerController = async (req, res) => {
     }
     if (!address) {
       return res.send({ message: "address is require" });
+    }
+    if (!answer) {
+      return res.send({ message: "answer is require" });
     }
 
     //existing user
@@ -41,6 +44,7 @@ export const registerController = async (req, res) => {
       phone,
       address,
       password: hashedPassword,
+      answer
     }).save();
 
     res.status(201).send({
@@ -57,7 +61,6 @@ export const registerController = async (req, res) => {
     });
   }
 };
-
 
 // method=> post login
 export const loginController = async (req, res) => {
@@ -111,11 +114,53 @@ export const loginController = async (req, res) => {
   }
 };
 
+//forgot password
 
+export const forgotPasswordController = async (req, res) => {
+  try {
+    const {email, answer, newPassword} = req.body
+    if (!email) {
+      res.status(400).send({ message: "Email is required" });
+    }
+    if (!answer) {
+      res.status(400).send({ message: "answer is required" });
+    }
+    if (!newPassword) {
+      res.status(400).send({ message: "newPassword is required" });
+    }
+
+    //check email and answer
+    const user = await userModel.findOne({ email, answer });
+
+    //validation
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Wrong Email and answer",
+      });
+    }
+    const hashed = await hashPassword(newPassword)
+    await userModel.findByIdAndUpdate(user._id,{ password: hashed });
+    res.status(200).send({
+      success: true,
+      message: "Password Reset Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
 
 // for the testing purpose  testController
-
-export const testController = (req,res) =>{
-  res.send("protected routes")
-
-}
+export const testController = (req, res) => {
+  try {
+    res.send("protected routes");
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};

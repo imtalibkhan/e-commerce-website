@@ -17,7 +17,7 @@ connedDB();
 //need to create rest object for create rest api
 const app = express();
 
-// app.use(cors)
+app.use(cors())
 
 //middleware
 app.use(express.json())
