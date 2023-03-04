@@ -1,62 +1,52 @@
+
 import React, { useState } from "react";
 import Layout from "./../../components/layout/Layout";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../../style/AuthStyles.css";
-import { useAuth } from "../../context/auth"; //context api
-
+import { useAuth } from "../../context/auth";
+import { useLocation } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [auth,setAuth] = useAuth()
+  const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
 
+  const location = useLocation()
+
+  // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post("/api/v1/auth/login", {
         email,
         password,
       });
       if (res && res.data.success) {
-        alert("login succesfully");
-        // toast.success(res.data && res.data.message);
+        toast.success(res.data && res.data.message);
         setAuth({
           ...auth,
-          id:res.data._id,
-          user:res.data.user,
+          user: res.data.user,
           token: res.data.token,
-        })
-        localStorage.setItem("auth",JSON.stringify(res.data));
-        navigate("/");
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
+      toast.error("Something went wrong");
     }
   };
-
   return (
-    <Layout title="Register E-commerce-App">
-      <div className="form-container">
-        <h1>Login Page</h1>
+    <Layout title="Register - Ecommer App">
+      <div className="form-container ">
         <form onSubmit={handleSubmit}>
-          {/* <div className="mb-3">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="enter your name"
-              required
-            />
-          </div> */}
+          <h4 className="title">LOGIN FORM</h4>
+
           <div className="mb-3">
             <input
               type="email"
@@ -64,11 +54,10 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
-              placeholder="enter your email"
+              placeholder="Enter Your Email "
               required
             />
           </div>
-
           <div className="mb-3">
             <input
               type="password"
@@ -76,35 +65,13 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
               id="exampleInputPassword1"
-              placeholder="enter your password"
+              placeholder="Enter Your Password"
               required
             />
           </div>
-          {/* <div className="mb-3">
-            <input
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="enter your phone number"
-              required
-            />
-          </div> */}
-          {/* <div className="mb-3">
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="enter your Address"
-              required
-            />
-          </div> */}
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            LOGIN
           </button>
         </form>
       </div>

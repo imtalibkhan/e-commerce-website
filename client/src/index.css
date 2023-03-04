@@ -55,7 +55,14 @@ font-family: 'Work Sans', sans-serif; */
   box-shadow: 0 8px 6px -6px rgb(58, 55, 55);
   --webkit-box-shadow: 0 8px 6px -6px rgb;
   border-bottom: 0.5px;
-  gap: 5%
+  gap: 5%;
+  background: 
+  /* linear-gradient(rgba(247, 42, 42, 0.4) 0 0), */
+  /* radial-gradient(rgb(156, 59, 59) 20%, transparent 16%),  */
+  radial-gradient(rgb(98, 7, 7) 15%, transparent 16%) 30px 30px,
+  rgb(214, 174, 63);
+background-size: 71px 71px;
+
 }
 
 .nav-link {
@@ -72,6 +79,21 @@ font-family: 'Work Sans', sans-serif; */
   font-weight: 700;
   font-family: "roboto", sans-serif;
   letter-spacing: 3px;
+  background: 
+    linear-gradient(#48B 0 0) bottom/100% 25vh no-repeat fixed,
+    linear-gradient(rgba(192,192,192,0.4) 0 0),
+    radial-gradient(dimgrey 20%, transparent 16%) 0    0   /60px 60px, 
+    radial-gradient(dimgrey 15%, transparent 16%) 30px 30px/60px 60px,
+    goldenrod;
+    background-size: 85px 85px;
+    border-radius: 7px;
+}
+
+
+.container-fluid{
+ padding-top: 3px;
+  background-color: rgb(151, 210, 255);
+  border-radius: 4px;
 }
 
 /* footer */
@@ -97,6 +119,9 @@ padding:26px;
   border-bottom: 2px solid rgb(242, 250, 13);
   border-radius: 5px;
 }
+
+
+
 
 
 
