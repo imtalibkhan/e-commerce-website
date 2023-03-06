@@ -3,12 +3,12 @@ import { NavLink, Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
-import Dashboard from "./../../pages/user/Dashboard";
+// import Dashboard from "./../../pages/user/Dashboard";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
 
-  const handleLogout = () => {
+  const handleLogout = () => {   
     setAuth({
       ...auth,
       user: null,

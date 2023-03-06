@@ -70,8 +70,10 @@ background-size: 71px 71px;
 }
 
 .active{
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(218, 117, 117);
   border-radius: 5px;
+  
+  
 }
 
 
