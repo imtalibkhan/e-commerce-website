@@ -74,6 +74,32 @@ const CreateCategory = () => {
     }
   };
 
+
+
+  //delete category
+  const handleDelete = async (pId) => {
+   
+    try {
+      // console.log(e);
+      const { data } = await axios.delete(
+        `/api/v1/category/delete-category/${pId}`,
+       
+      );
+      if (data.success) {
+        toast.success(`category is deleted`);
+        // setSelected(null);
+        // setUpdatedName("");
+        // setVisible(false);
+        getAllCategory();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something Went Wrong");
+    }
+  };
+
   return (
     <Layout title={"Dashboard -create-category"}>
       <div className="container-fluid m-3 p-3">
@@ -115,7 +141,7 @@ const CreateCategory = () => {
                           >
                             Edit
                           </button>
-                          <button className="btn btn-danger ms-2">
+                          <button className="btn btn-danger ms-2" onClick={()=> {handleDelete(c._id)}}>
                             Delete
                           </button>
                         </td>
