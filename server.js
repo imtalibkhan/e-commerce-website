@@ -6,6 +6,7 @@ import connedDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js"
 import cors from "cors"
 import categoryRoutes from "./routes/categoryRoutes.js"
+import productRoutes from "./routes/productRoutes.js"
 
 
 
@@ -27,6 +28,7 @@ app.use(morgan('dev'))
 // all routes will be there 
 app.use("/api/v1/auth", authRoute)
 app.use('/api/v1/category', categoryRoutes)
+app.use('/api/v1/products', productRoutes)
 
 
 
