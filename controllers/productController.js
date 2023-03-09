@@ -165,10 +165,10 @@ export const updateProductController = async (req, res) => {
       case !quantity:
         return res.status(500).send({ error: "quantity is required" });
 
-      case !photo && photo.size > 100000:
+      case photo && photo.size > 100000:
         return res
           .status(500)
-          .send({ error: "photo && photo.size > 100000 is required" });
+          .send({ error: "photo && photo.size > 1000000 is required" });
     }
     const products = await productModel.findByIdAndUpdate(
       req.params.pid,
