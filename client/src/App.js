@@ -11,11 +11,13 @@ import PrivateRoute from "./components/Routes/Private";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import AdminRoute from "./components/Routes/AdminRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
-import CreateProduct from './pages/Admin/CreateProduct';
-import CreateCategory from './pages/Admin/CreateCategory';
-import Users from './pages/Admin/Users';
-import Order from './pages/user/Order';
+import CreateProduct from "./pages/Admin/CreateProduct";
+import CreateCategory from "./pages/Admin/CreateCategory";
+import Users from "./pages/Admin/Users";
+import Order from "./pages/user/Order";
 import Profile from "./pages/user/Profile";
+import Productss from "./pages/Admin/Productss";
+import UpdateProduct from "./pages/Admin/UpdaetProduct";
 
 function App() {
   return (
@@ -28,18 +30,22 @@ function App() {
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Order />} />
           <Route path="user/profile" element={<Profile />} />
-
-
         </Route>
 
         {/* admin route */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
+
           <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route
+            path="admin/products/:slug"
+            element={<UpdateProduct />}
+          />
+
+          <Route path="admin/productss" element={<Productss />} />
+
           <Route path="admin/create-users" element={<Users />} />
-
-
         </Route>
 
         <Route path="/register" element={<Register />} />
