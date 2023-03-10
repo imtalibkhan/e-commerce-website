@@ -1,16 +1,20 @@
+
 import React, { useState, useEffect } from "react";
 import Layout from "./../components/layout/Layout";
 
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
-import { Prices } from "./../components/prices";
-
+ import { Prices } from "./../components/prices";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
+  //get all cat
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
@@ -24,20 +28,49 @@ const HomePage = () => {
 
   useEffect(() => {
     getAllCategory();
+    getTotal();
   }, []);
-
   //get products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/products/get-product");
+      setLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setLoading(false);
       setProducts(data.products);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  //getTOtal COunt
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/products/product-count");
+      setTotal(data?.total);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //filter by category
+  useEffect(() => {
+    if (page === 1) return;
+    loadMore();
+  }, [page]);
+  //load more
+  const loadMore = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setLoading(false);
+      setProducts([...products, ...data?.products]);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
+  // filter by cat
   const handleFilter = (value, id) => {
     let all = [...checked];
     if (value) {
@@ -47,18 +80,15 @@ const HomePage = () => {
     }
     setChecked(all);
   };
-
   useEffect(() => {
     if (!checked.length || !radio.length) getAllProducts();
-    //eslint-disable-next-line
-  }, []);
+  }, [checked.length, radio.length]);
 
   useEffect(() => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
-  //get filter product
-
+  //get filterd product
   const filterProduct = async () => {
     try {
       const { data } = await axios.post("/api/v1/products/product-filters", {
@@ -70,14 +100,12 @@ const HomePage = () => {
       console.log(error);
     }
   };
-
   return (
-    <Layout title={"All products - Best Offers"}>
-      <div className="row mt-2">
+    <Layout title={"ALl Products - Best offers "}>
+      <div className="container-fluid row mt-3">
         <div className="col-md-2">
-          <h3 className="text-center">Filter By Category</h3>
+          <h4 className="text-center">Filter By Category</h4>
           <div className="d-flex flex-column">
-            {" "}
             {categories?.map((c) => (
               <Checkbox
                 key={c._id}
@@ -87,8 +115,8 @@ const HomePage = () => {
               </Checkbox>
             ))}
           </div>
-          {/* price by filter */}
-          <h3 className="text-center mt-4">Filter By Price</h3>
+          {/* price filter */}
+          <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
@@ -98,23 +126,23 @@ const HomePage = () => {
               ))}
             </Radio.Group>
           </div>
-
           <div className="d-flex flex-column">
-           <button className="btn btn-danger" onClick={() => window.location.reload()}>Reset Filter</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => window.location.reload()}
+            >
+              RESET FILTERS
+            </button>
           </div>
-
-
         </div>
         <div className="col-md-9">
-          {/* {JSON.stringify(radio, null, 4)} */}
-          <h1 className="text-center">all Products</h1>
+          <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
-              <div className="card m-2" style={{ width: "27rem" }}>
+              <div className="card m-2" style={{ width: "37rem" }}>
                 <img
                   src={`/api/v1/products/product-photo/${p._id}`}
                   className="card-img-top"
-                  style={{ height: "10rem", width: "10rem" }}
                   alt={p.name}
                 />
                 <div className="card-body">
@@ -123,12 +151,24 @@ const HomePage = () => {
                     {p.description.substring(0, 30)}...
                   </p>
                   <p className="card-text"> $ {p.price}</p>
-
-                  <button class="btn btn-primary ms-1">More details</button>
-                  <button class="btn btn-secondary ms-1">Add to card</button>
+                  <button class="btn btn-primary ms-1">More Details</button>
+                  <button class="btn btn-secondary ms-1">ADD TO CART</button>
                 </div>
               </div>
             ))}
+          </div>
+          <div className="m-2 p-3">
+            {products && products.length < total && (
+              <button
+                className="btn btn-warning"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}
+              >
+                {loading ? "Loading ..." : "Loadmore"}
+              </button>
+            )}
           </div>
         </div>
       </div>
