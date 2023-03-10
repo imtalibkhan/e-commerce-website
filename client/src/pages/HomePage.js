@@ -49,28 +49,27 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-   if(!checked.length || !radio.length) getAllProducts();
-   //eslint-disable-next-line
-
+    if (!checked.length || !radio.length) getAllProducts();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-if(checked.length || radio.length) filterProduct()
- 
-   }, [checked,radio]);
-
-
+    if (checked.length || radio.length) filterProduct();
+  }, [checked, radio]);
 
   //get filter product
 
-  const filterProduct =async()=> {
+  const filterProduct = async () => {
     try {
-      const {data} = await axios.post('/api/v1/products/product-filters', {checked,radio})
-      setProducts(data?.products)
+      const { data } = await axios.post("/api/v1/products/product-filters", {
+        checked,
+        radio,
+      });
+      setProducts(data?.products);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <Layout title={"All products - Best Offers"}>
@@ -88,7 +87,7 @@ if(checked.length || radio.length) filterProduct()
               </Checkbox>
             ))}
           </div>
-{/* price by filter */}
+          {/* price by filter */}
           <h3 className="text-center mt-4">Filter By Price</h3>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
@@ -99,9 +98,15 @@ if(checked.length || radio.length) filterProduct()
               ))}
             </Radio.Group>
           </div>
+
+          <div className="d-flex flex-column">
+           <button className="btn btn-danger" onClick={() => window.location.reload()}>Reset Filter</button>
+          </div>
+
+
         </div>
         <div className="col-md-9">
-          {JSON.stringify(radio, null, 4)}
+          {/* {JSON.stringify(radio, null, 4)} */}
           <h1 className="text-center">all Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
@@ -114,7 +119,9 @@ if(checked.length || radio.length) filterProduct()
                 />
                 <div className="card-body">
                   <h5 className="card-title">{p.name}</h5>
-                  <p className="card-text">{p.description.substring(0,30)}...</p>
+                  <p className="card-text">
+                    {p.description.substring(0, 30)}...
+                  </p>
                   <p className="card-text"> $ {p.price}</p>
 
                   <button class="btn btn-primary ms-1">More details</button>

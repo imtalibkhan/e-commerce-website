@@ -159,3 +159,10 @@ padding:26px;
   width:10px;
   height:10px
 } */
+
+
+.home_1{
+  display: flex;
+  border: 1px solid red;
+
+}
