@@ -18,12 +18,15 @@ import Order from "./pages/user/Order";
 import Profile from "./pages/user/Profile";
 import Productss from "./pages/Admin/Productss";
 import UpdateProduct from "./pages/Admin/UpdaetProduct";
+import Search from './pages/Search';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<Search />} />
+
 
         {/* nested route proted route  users*/}
         <Route path="/dashboard" element={<PrivateRoute />}>
