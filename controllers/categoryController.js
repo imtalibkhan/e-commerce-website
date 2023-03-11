@@ -62,7 +62,7 @@ export const updateCategoryController =async(req,res) => {
     }
 }
 
-
+//get all
 
 export const categoryController = async(req,res) => {
     try {
@@ -72,7 +72,9 @@ export const categoryController = async(req,res) => {
             success:true,
             message: "All category list",
             category,
-        })
+           
+        });
+        console.log(category)
         
     } catch (error) {
         console.log(error)

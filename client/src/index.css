@@ -142,13 +142,13 @@ padding:26px;
 
 /* register page */
 
-.register{
+/* .register{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 70vh;
   flex-direction: column;
-}
+} */
 
 .product-link{
   text-decoration: none;
@@ -161,8 +161,16 @@ padding:26px;
 } */
 
 
-.home_1{
+/* .home_1{
   display: flex;
   border: 1px solid red;
 
+} */
+
+.dropdown-menu{
+ 
+  box-shadow: 10px 10px 5px lightblue inset;
+  border-radius: 7px;
+
 }
+
