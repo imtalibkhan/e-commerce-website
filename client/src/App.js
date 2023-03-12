@@ -18,11 +18,12 @@ import Order from "./pages/user/Order";
 import Profile from "./pages/user/Profile";
 import Productss from "./pages/Admin/Productss";
 import UpdateProduct from "./pages/Admin/UpdaetProduct";
-import Search from './pages/Search';
-import ProductDetail from './pages/ProductDetail';
-import Categories from './pages/Categories';
+import Search from "./pages/Search";
+import ProductDetail from "./pages/ProductDetail";
+import Categories from "./pages/Categories";
 import CategoryProduct from "./pages/CategoryProduct";
-import CartPage from './pages/CartPage';
+import CartPage from "./pages/CartPage";
+import AdminOrders from "./pages/Admin/AdminOrder";
 
 function App() {
   return (
@@ -35,11 +36,7 @@ function App() {
 
         <Route path="/category/:slug" element={<CategoryProduct />} />
 
-
-
-
         <Route path="/search" element={<Search />} />
-
 
         {/* nested route proted route  users*/}
         <Route path="/dashboard" element={<PrivateRoute />}>
@@ -54,14 +51,14 @@ function App() {
           <Route path="admin/create-category" element={<CreateCategory />} />
 
           <Route path="admin/create-product" element={<CreateProduct />} />
-          <Route
-            path="admin/products/:slug"
-            element={<UpdateProduct />}
-          />
+          <Route path="admin/products/:slug" element={<UpdateProduct />} />
 
           <Route path="admin/productss" element={<Productss />} />
 
-          <Route path="admin/create-users" element={<Users />} />
+          <Route path="admin/users" element={<Users />} />
+          <Route path="admin/orders" element={<AdminOrders />} />
+
+
         </Route>
 
         <Route path="/register" element={<Register />} />

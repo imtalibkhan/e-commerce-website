@@ -7,7 +7,7 @@ import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "./../components/prices";
 import { toast } from "react-hot-toast";
-
+import "../style/Homepage.css";
 const HomePage = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);

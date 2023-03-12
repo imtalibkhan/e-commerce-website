@@ -4,31 +4,44 @@ import { NavLink } from "react-router-dom";
 const AdminMenu = () => {
   return (
     <>
+      <div className="text-center">
+        <div className="list-group">
+          <h4>Admin Panel</h4>
+          <NavLink
+            to="/dashboard/admin/create-category"
+            className="list-group-item list-group-item-action"
+          >
+            Create Category
+          </NavLink>
+          <NavLink
+            to="/dashboard/admin/create-product"
+            className="list-group-item list-group-item-action"
+          >
+            Create product
+          </NavLink>
 
-    <div className="text-center">
+          <NavLink
+            to="/dashboard/admin/productss"
+            className="list-group-item list-group-item-action"
+          >
+            productss
+          </NavLink>
 
-    <div className="list-group">
-        <h4>Admin Panel</h4>
-        <NavLink to="/dashboard/admin/create-category" className="list-group-item list-group-item-action">
-        Create Category
-        </NavLink>
-        <NavLink to="/dashboard/admin/create-product" className="list-group-item list-group-item-action">
-         Create product
-        </NavLink>
+          <NavLink
+            to="/dashboard/admin/orders"
+            className="list-group-item list-group-item-action"
+          >
+            Orders
+          </NavLink>
 
-        <NavLink to="/dashboard/admin/productss" className="list-group-item list-group-item-action">
-          productss
-        </NavLink>
-
-
-        <NavLink to="/dashboard/admin/create-users" className="list-group-item list-group-item-action">
-        Users
-        </NavLink>
-        
+          <NavLink
+            to="/dashboard/admin/users"
+            className="list-group-item list-group-item-action"
+          >
+            Users
+          </NavLink>
+        </div>
       </div>
-
-    </div>
-     
     </>
   );
 };
