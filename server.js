@@ -8,6 +8,7 @@ import cors from "cors"
 import categoryRoutes from "./routes/categoryRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import  path from "path";
+import {fileURLToPath} from "url";
 
 
 
@@ -16,6 +17,9 @@ dotenv.config();
 
 //database config
 connedDB();
+//esmodule fix
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
 
 //need to create rest object for create rest api
 const app = express();
