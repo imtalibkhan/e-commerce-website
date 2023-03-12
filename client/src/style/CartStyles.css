@@ -9,7 +9,7 @@
     background-color: rgba(0, 0, 255, 0.072) !important;
   }
   .cart-page h1 > p {
-    font-size: 20px;
+    font-size: 10px;
     margin-top: 10px;
   }
   
@@ -26,4 +26,8 @@
   .cart-page .cart-summary {
     text-align: center;
     /* margin-top: -140px !important; */
+  }
+
+  .text-centerr{
+    font-size: 10px;
   }

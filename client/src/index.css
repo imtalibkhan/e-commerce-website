@@ -52,6 +52,7 @@ font-family: 'Work Sans', sans-serif; */
   font-size: 17px;
   line-height: 26px;
   text-transform: uppercase;
+  background-color: red;
   box-shadow: 0 8px 6px -6px rgb(58, 55, 55);
   --webkit-box-shadow: 0 8px 6px -6px rgb;
   border-bottom: 0.5px;
@@ -94,14 +95,15 @@ background-size: 71px 71px;
 
 .container-fluid{
  padding-top: 3px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(190, 228, 225);
   border-radius: 4px;
+ 
 }
 
 /* footer */
 
 .footer{
-  background-color: black;
+  background-color: hsl(50, 33%, 25%);
 color:white;
 padding:26px;
 --webkit-box-shadow: 0 8px 6px -6px rgb;
@@ -174,3 +176,12 @@ padding:26px;
 
 }
 
+
+.nav_s{
+  background-color: hsl(50, 33%, 25%);
+  color: wheat;
+
+}
+.n_text{
+  color:rgb(244, 223, 223)
+}
